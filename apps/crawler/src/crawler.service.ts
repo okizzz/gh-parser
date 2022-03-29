@@ -36,11 +36,12 @@ export class CrawlerService {
       const updateObject = this.transformFactory.resolve(action).handle(data);
       const enrichedProfile = await this.save(updateObject);
       if (enrichedProfile) {
+        console.log({ enrichedProfile });
         await this.index(enrichedProfile);
       }
     } catch (e) {
       console.error(`failed to crawl ${url} because of ${e.message}`);
-      throw new Error('PROXY_FAILED');
+      throw e;
     }
   }
 
