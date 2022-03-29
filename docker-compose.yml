@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  rabbit:
+    image: bitnami/rabbitmq:latest
+    hostname: rabbit
+    restart: always
+    ports:
+      - "5672:5672"   # amqp
+      - "15672:15672" # web ui
+  mongo:
+    image: bitnami/mongodb:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+  elasticsearch:
+    image: bitnami/elasticsearch:latest
+    restart: always
+    ports:
+      - "9200:9200"
+
+volumes:
+  rabbitmq:
+  postgres:
+  redis:
+  minio:
+networks:
+  overlay:
